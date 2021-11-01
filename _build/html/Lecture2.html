@@ -1,0 +1,1869 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Lecture 2: Measures for Association in Categorical Data &#8212; Edinburgh Data Project</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Lecture 3: Linear Regression with Continues Dependent Variable and Multiple Independent Variables" href="Lecture3.html" />
+    <link rel="prev" title="Lecture 1: T-Test and ANOVA" href="Lecture1.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Edinburgh Data Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduciton to Political Data Analysis: Python tutorials
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Lecture1.html">
+   Lecture 1: T-Test and ANOVA
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Lecture 2: Measures for Association in Categorical Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Lecture3.html">
+   Lecture 3: Linear Regression with Continues Dependent Variable and Multiple Independent Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Lecture4.html">
+   Lecture 4: Logistic Regression with Binary Dependent Variable and Multiple Independent Variables
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Lecture2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/Lecture2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#turkey-high-turnout">
+   Turkey - High Turnout
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chi2-contingency">
+     chi2_contingency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#expected-values">
+     Expected values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#value">
+     𝜒2 value
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#p-value">
+     p-Value
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#degree-of-freedom">
+     Degree of freedom
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#critical-values">
+     Critical values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-null-and-alternative-hypotheses">
+     The Null and Alternative Hypotheses
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#switzerland-low-turnout">
+   Switzerland - Low Turnout
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     chi2_contingency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Expected values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     𝜒2 value
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     p-Value
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     Degree of freedom
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     Critical values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     The Null and Alternative Hypotheses
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interactive-graphs-for-the-null-and-alternative-hypotheses">
+   Interactive Graphs for The Null and Alternative Hypotheses
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion-of-chi-square">
+   Conclusion of Chi Square
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hypothesis-testing-plots-and-z-tests">
+   Hypothesis Testing Plots and z-tests
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-visualization-optional">
+   Data Visualization (optional)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interactive-plot-for-social-factors-font">
+   Interactive Plot for Social Factors
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="lecture-2-measures-for-association-in-categorical-data">
+<h1>Lecture 2: Measures for Association in Categorical Data<a class="headerlink" href="#lecture-2-measures-for-association-in-categorical-data" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<br>
+<br>
+<font face="Helvetica" size="3.5px" color="#323752" >In this lecture we will learn <font face="Helvetica" size="3.5px" color="#63b6c7" ><b>Contingency tables </b></font> and <font face="Helvetica" size="3.5px" color="#63b6c7" ><b> Chi-square.</b></font> Also some coding basics will be mentioned. In the last part we will focus on data visualization and plot libraries. <p><font face="Helvetica" size="3.5px" color="#323752" >First we will import the neccesarry libraries.</font>
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2_contingency</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_64620</span><span class="o">/</span><span class="mf">1182702133.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" >We do not want to see undesired warnings in our report.</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" >In the following code cell we will create a function to hide/show code cells. Since some of the code cells that we will create in this tutorial is quite long especially the ones for the widgets. We will call this function inside the cells.</font>
+<br>
+<br><br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" >It's time to read the dataset. The dataset is taken from <a href="url" target="_blank"> https://cses.org/data-download/cses-module-5-2016-2021/</a>  . All the necessary information about the dataset is given in the booklets at the website. Especially, reading the booklet about the variable names is recommended. Our dataset is in cvs format. 
+</font>
+<br>
+<br>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#data = pd.read_csv(r&#39;cses5.csv&#39;)</span>
+<span class="c1">#data.info()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" >Our dataset columns has code names for variables. We will change the names in oder to simplify the understanding.</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#data = data.rename(columns={&#39;E1006_NAM&#39;: &#39;country_name&#39;})</span>
+<span class="c1">#data = data.rename(columns={&#39;E2002&#39;: &#39;gender&#39;})</span>
+<span class="c1">#data = data.rename(columns={&#39;E2003&#39;: &#39;education&#39;})</span>
+<span class="c1">#data = data.rename(columns={&#39;E2006&#39;: &#39;employement&#39;})</span>
+<span class="c1">#data = data.rename(columns={&#39;E3024_4&#39;: &#39;closeness_party&#39;})</span>
+<span class="c1">#data = data.rename(columns={&#39;E4006&#39;: &#39;turnout&#39;})</span>
+<span class="c1">#data = data.rename(columns={&#39;E5075&#39;: &#39;women_in_parliament&#39;})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" >Also, we get rid of the unnecessary variables to shrink the data, as shown in the previous info() command, it has 554 different variables (column entries).</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#data1 = data[[&#39;country_name&#39;, &#39;gender&#39;,&#39;education&#39;,</span>
+<span class="c1">#        &#39;employement&#39;, &#39;closeness_party&#39;,&#39;turnout&#39;,&#39;women_in_parliament&#39;]]</span>
+
+<span class="c1">#data1.info()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;data1.csv&#39;</span><span class="p">)</span> 
+<span class="n">data1</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 55515 entries, 0 to 55514
+Data columns (total 8 columns):
+ #   Column               Non-Null Count  Dtype  
+---  ------               --------------  -----  
+ 0   Unnamed: 0           55515 non-null  int64  
+ 1   country_name         55515 non-null  object 
+ 2   gender               55515 non-null  int64  
+ 3   education            55515 non-null  int64  
+ 4   employement          55515 non-null  int64  
+ 5   closeness_party      55515 non-null  int64  
+ 6   turnout              55515 non-null  float64
+ 7   women_in_parliament  55515 non-null  float64
+dtypes: float64(2), int64(5), object(1)
+memory usage: 3.4+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > In the following cell, we will create a dictionary that use country names as dictionary keys. We will use this dictionary a lot in the remaining of the project. The main logic is spliting the total data by using country names. Therefore, we can use a country name to call all the data about this country.</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">ct</span><span class="p">:</span> <span class="n">data1</span><span class="p">[</span><span class="n">data1</span><span class="o">.</span><span class="n">country_name</span><span class="o">==</span> <span class="n">ct</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">ct</span> <span class="ow">in</span> <span class="n">data1</span><span class="p">[</span><span class="s1">&#39;country_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Before starting the calculations, we need to cleanse the data set. Since missing informations are determined, we need to get rid of them. For instance, a missing information in turnout data is given with <font face="Helvetica" size="3.5px" color="#63b6c7" ><b>'997'</b></font> and <font face="Helvetica" size="3.5px" color="#63b6c7" ><b>'999'</b></font>. So we need to make them <b>0 </b>before calculating the avarage turnout of the countries. While making the missing turnouts 0, we need to change respondent count so that avarage is not affected.
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">turnout_list</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">count</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">df_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">count</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;turnout&#39;</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;turnout&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">997</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;turnout&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">999</span><span class="p">:</span>
+            <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;turnout&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">count</span><span class="p">[</span><span class="n">country</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="p">[</span><span class="n">country</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;turnout&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mf">0.000001</span>
+        <span class="n">count</span><span class="p">[</span><span class="n">country</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">turnout_list</span><span class="p">[</span><span class="n">country</span><span class="p">]</span> <span class="o">=</span>  <span class="n">b</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">])</span><span class="o">-</span> <span class="n">count</span><span class="p">[</span><span class="n">country</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Now, we have average turnouts of countries in the turnout_list and we can access them by using country names. 
+<br>
+Next step, we will sort them to find the most and the least. Some of the countries does not sustain neccessary data, those are at the end of the list.</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_turnout</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">turnout_list</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sorted_turnout</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Australia&#39;: 92.12787860931059, &#39;Belgium&#39;: 88.7206829823555, &#39;Turkey&#39;: 88.02779232928033, &#39;Sweden&#39;: 87.25671511627937, &#39;Brazil&#39;: 83.9430167597752, &#39;Iceland&#39;: 80.48768499256693, &#39;Austria&#39;: 79.9780833333332, &#39;Norway&#39;: 78.4532366071428, &#39;Germany&#39;: 75.68032480314962, &#39;Italy&#39;: 73.12688877755477, &#39;Finland&#39;: 72.18648310388005, &#39;Taiwan&#39;: 70.81278338278948, &#39;Great Britain&#39;: 69.74130081300834, &#39;Canada&#39;: 68.02560581583201, &#39;Costa Rica&#39;: 65.9588688410825, &#39;Ireland&#39;: 65.01590233545657, &#39;New Zealand&#39;: 63.40353982300916, &#39;Hong Kong&#39;: 58.414290657439494, &#39;Republic of Korea&#39;: 57.80560467055897, &#39;Greece&#39;: 56.39044573643435, &#39;Portugal&#39;: 55.61186000000017, &#39;United States of America&#39;: 55.171381578947646, &#39;Lithuania&#39;: 50.3169533333337, &#39;Chile&#39;: 46.8356587926498, &#39;Switzerland&#39;: 46.17013993541263, &#39;France&#39;: 1e-06, &#39;Hungary&#39;: 1e-06, &#39;Montenegro&#39;: 1e-06}
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Let's see the top five in a clear format.</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_five_list</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">sorted_turnout</span><span class="o">.</span><span class="n">keys</span><span class="p">()][</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="n">turnouts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">top_five_list</span><span class="p">:</span>
+    <span class="n">turnouts</span><span class="p">[</span><span class="n">country</span><span class="p">]</span> <span class="o">=</span> <span class="n">turnout_list</span><span class="p">[</span><span class="n">country</span><span class="p">]</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">turnouts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Australia&#39;: 92.12787860931059, &#39;Belgium&#39;: 88.7206829823555, &#39;Turkey&#39;: 88.02779232928033, &#39;Sweden&#39;: 87.25671511627937, &#39;Brazil&#39;: 83.9430167597752}
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" >Until now, we can determine our suspects. We will choose two countries for statistical analysis; one with high turnout value, the other one with low turnout value.
+<br>
+Our selected countries are :
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1) Turkey (high turnout value: 88.027)
+2) Switzerland (low turnout value: 46.170)
+</pre></div>
+</div>
+<br>
+<br><section id="turkey-high-turnout">
+<h2>Turkey - High Turnout<a class="headerlink" href="#turkey-high-turnout" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<br>
+<font face="Helvetica" size="3px" color="#323752" > We will start with clearing missing informations to get much more clean and logical graphs and tables.</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">97</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">98</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">99</span><span class="p">:</span>
+        <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">96</span><span class="p">:</span>
+        <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">7</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">8</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+        <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">13</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">14</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">97</span>  <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">98</span>  <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">99</span><span class="p">:</span>
+        <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Now, we can start to learn what is Contingency tables and Chi-square. We will create a table in the following cells with gender and degree of closeness to a party in Turkey. This table is used to learn the concepts but different social statuses that are listed above might be selected. </font>
+<br>
+<br>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_female_t</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">count_male_t</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">male</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span>
+<span class="n">female</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">count_male_t</span> <span class="o">=</span> <span class="n">count_male_t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">male</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">count_female_t</span> <span class="o">=</span> <span class="n">count_female_t</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">female</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">count_male_t</span> <span class="o">=</span> <span class="n">count_male_t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">male</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">count_female_t</span> <span class="o">=</span> <span class="n">count_female_t</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">female</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">count_male_t</span> <span class="o">=</span> <span class="n">count_male_t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">male</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">count_female_t</span> <span class="o">=</span> <span class="n">count_female_t</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">female</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">count_male_t</span> <span class="o">=</span> <span class="n">count_male_t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">male</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">count_female_t</span> <span class="o">=</span> <span class="n">count_female_t</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">female</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > We are going to create sample data which is about gender and degree of closeness to a party in Turkey. <font face="Helvetica" size="3.5px" color="#63b6c7" ><b>Pandas </b></font>index and columns are used to name rows and columns. 
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">closeness_party</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">male</span><span class="p">,</span>
+        <span class="n">female</span>
+    <span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span><span class="s2">&quot;Female&quot;</span><span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Very Close&quot;</span><span class="p">,</span><span class="s2">&quot;Somewhat Close&quot;</span><span class="p">,</span><span class="s2">&quot;Not very Close&quot;</span><span class="p">,</span><span class="s2">&quot;Missing/No Info&quot;</span><span class="p">])</span>
+
+
+<span class="n">closeness_party</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Very Close</th>
+      <th>Somewhat Close</th>
+      <th>Not very Close</th>
+      <th>Missing/No Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Male</th>
+      <td>125</td>
+      <td>170</td>
+      <td>17</td>
+      <td>160</td>
+    </tr>
+    <tr>
+      <th>Female</th>
+      <td>138</td>
+      <td>258</td>
+      <td>16</td>
+      <td>185</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Python uses zero-based indexing. That means, the first element has an index 0, the second has index 1, and so on. If you want to access the fourth value in the <b>chi2_contingency(closeness_party)</b> you need to use <b>[3]</b>.</font>
+<br>
+<br><section id="chi2-contingency">
+<h3>chi2_contingency<a class="headerlink" href="#chi2-contingency" title="Permalink to this headline">¶</a></h3>
+<p><font face="Helvetica" size="3px" color="#323752" > <font face="Helvetica" size="3.5px" color="#63b6c7" ><b>SciPy’s chi2_contingency() </b></font>returns four values, <b> 𝜒2 value, p-value, degree of freedom and expected values.</b>
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6.044118123095128,
+ 0.10948340023844266,
+ 3,
+ array([[116.12347989, 188.97661366,  14.57062675, 152.3292797 ],
+        [146.87652011, 239.02338634,  18.42937325, 192.6707203 ]]))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="expected-values">
+<h3>Expected values<a class="headerlink" href="#expected-values" title="Permalink to this headline">¶</a></h3>
+<p><font face="Helvetica" size="3px" color="#323752" > You can find the expected values at the forth in the returned value. It is in an array form. Let’s print the expected values. We again use the Pandas dataframe. We are going to add index and column values and round the values to the two decimal places <b>round(2)</b>. </font>
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[:,:],</span> 
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span><span class="s2">&quot;Female&quot;</span><span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Very Close&quot;</span><span class="p">,</span><span class="s2">&quot;Somewhat Close&quot;</span><span class="p">,</span><span class="s2">&quot;Not very Close&quot;</span><span class="p">,</span><span class="s2">&quot;Missing/No Info&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Very Close</th>
+      <th>Somewhat Close</th>
+      <th>Not very Close</th>
+      <th>Missing/No Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Male</th>
+      <td>116.12</td>
+      <td>188.98</td>
+      <td>14.57</td>
+      <td>152.33</td>
+    </tr>
+    <tr>
+      <th>Female</th>
+      <td>146.88</td>
+      <td>239.02</td>
+      <td>18.43</td>
+      <td>192.67</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > The table above is called <font face="Helvetica" size="3.5px" color="#63b6c7" ><b> a contingency table.</b>
+<br>
+<br></section>
+<section id="value">
+<h3>𝜒2 value<a class="headerlink" href="#value" title="Permalink to this headline">¶</a></h3>
+<p><font face="Helvetica" size="3px" color="#323752" > The 𝜒2 equation tells us to find the square of the difference between the actual value and expected value and divide it by the expected value. This is what chi2_contingency is doing behind the scene. Since Python is 0 based index, in order to print the 𝜒2 we need to use <b>[0]</b>, which is the first value.</font>
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chisquare</span><span class="o">=</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chisquare</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.044118123095128
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="p-value">
+<h3>p-Value<a class="headerlink" href="#p-value" title="Permalink to this headline">¶</a></h3>
+<p><font face="Helvetica" size="3px" color="#323752" > You can find the p-value at the second in the returned value. p-value measures the probability of seeing the effect when the null hypothesis is true. So, when the p-value is low enough, we reject the null hypothesis and conclude the observed effect holds.</font>
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pvalue</span><span class="o">=</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvalue</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.10948340023844266
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="degree-of-freedom">
+<h3>Degree of freedom<a class="headerlink" href="#degree-of-freedom" title="Permalink to this headline">¶</a></h3>
+<p><font face="Helvetica" size="3px" color="#323752" >In the returned value from the chi2_contingency, the third one is the degree of freedom. We use <b>[2]</b> which is the third one. The following will output 3.</font>
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dof</span><span class="o">=</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dof</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="critical-values">
+<h3>Critical values<a class="headerlink" href="#critical-values" title="Permalink to this headline">¶</a></h3>
+<p><font face="Helvetica" size="3px" color="#323752" > The level of significance and degree of freedom can be used to find the critical value. As I mentioned, you can find the degree of freedom from the array. State and define probability from the level of significance, 1%, 5% 10%, etc.</font>
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">significance</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">significance</span>
+<span class="n">dof</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">critical_value</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dof</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">critical_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.344866730144373
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Let's check the p-value by using the critical value that we calculated </font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">critical_value</span><span class="p">,</span> <span class="n">dof</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.99
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Which confirms the critical value.</font>
+<br>
+<br></section>
+<section id="the-null-and-alternative-hypotheses">
+<h3>The Null and Alternative Hypotheses<a class="headerlink" href="#the-null-and-alternative-hypotheses" title="Permalink to this headline">¶</a></h3>
+<p><font face="Helvetica" size="3px" color="#323752" >Chi-square test requires to state the null hypothesis, H0, and the alternative hypothesis, H1. The null hypothesis is the statement that our two variables are independent. The alternative hypothesis is the statement that they are not independent.</font>
+<br></p>
+<p><font face="Helvetica" size="3px" color="#323752" > If the calculated Chi-square is greater than the critical value we <b>reject the null hypothesis.</b></font>
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value is: &#39;</span><span class="p">,</span> <span class="n">pval</span><span class="p">)</span>
+
+<span class="n">significance</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">significance</span>
+
+<span class="n">critical_value</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dof</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;chi=</span><span class="si">%.6f</span><span class="s1">, critical value=</span><span class="si">%.6f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">chi</span><span class="p">,</span> <span class="n">critical_value</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">chi</span> <span class="o">&gt;</span> <span class="n">critical_value</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;At </span><span class="si">%.2f</span><span class="s2"> level of significance, we reject the null hypotheses and accept H1. </span>
+<span class="s2">They are not independent.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">significance</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;At </span><span class="si">%.2f</span><span class="s2"> level of significance, we accept the null hypotheses. </span>
+<span class="s2">They are independent.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">significance</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value is:  0.10948340023844266
+chi=6.044118, critical value=7.814728
+
+At 0.05 level of significance, we accept the null hypotheses. 
+They are independent.
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Alternatively, we can compare the p-value and the level of significance. If p-value < the level of significance, <b> we reject the null hypothesis.</b></font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)</span>
+
+<span class="n">significance</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value=</span><span class="si">%.6f</span><span class="s1">, significance=</span><span class="si">%.2f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pval</span><span class="p">,</span> <span class="n">significance</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">pval</span> <span class="o">&lt;</span> <span class="n">significance</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;At </span><span class="si">%.2f</span><span class="s2"> level of significance, we reject the null hypotheses and accept H1. </span>
+<span class="s2">They are not independent.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">significance</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;At </span><span class="si">%.2f</span><span class="s2"> level of significance, we accept the null hypotheses. </span>
+<span class="s2">They are independent.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">significance</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value=0.109483, significance=0.05
+
+At 0.05 level of significance, we accept the null hypotheses. 
+They are independent.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="switzerland-low-turnout">
+<h2>Switzerland - Low Turnout<a class="headerlink" href="#switzerland-low-turnout" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > We will make same analysis on Switzerland. Same steps will be implemented. Try to get familiar with them. We will start with clearing missing informations to get much more clean and logical graphs and tables.</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">97</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">98</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">99</span><span class="p">:</span>
+        <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">96</span><span class="p">:</span>
+        <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">7</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">8</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+        <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">13</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">14</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">97</span>  <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">98</span>  <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">99</span><span class="p">:</span>
+        <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > We will create a table in the following cells with gender and degree of closeness to a party in Switzerland. </font>
+<br>
+<br>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_female_s</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">count_male_s</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">male</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span>
+<span class="n">female</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">count_male_s</span> <span class="o">=</span> <span class="n">count_male_s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">male</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">count_female_s</span> <span class="o">=</span> <span class="n">count_female_s</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">female</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">count_male_s</span> <span class="o">=</span> <span class="n">count_male_s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">male</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">count_female_s</span> <span class="o">=</span> <span class="n">count_female_s</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">female</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">count_male_s</span> <span class="o">=</span> <span class="n">count_male_s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">male</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">count_female_s</span> <span class="o">=</span> <span class="n">count_female_s</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">female</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">count_male_s</span> <span class="o">=</span> <span class="n">count_male_s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">male</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">count_female_s</span> <span class="o">=</span> <span class="n">count_female_s</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">female</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > We are going to create sample data which is about gender and degree of closeness to a party in Switzerland. <font face="Helvetica" size="3.5px" color="#63b6c7" ><b>Pandas </b></font>index and columns are used to name rows and columns. 
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">closeness_party</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">male</span><span class="p">,</span>
+        <span class="n">female</span>
+    <span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span><span class="s2">&quot;Female&quot;</span><span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Very Close&quot;</span><span class="p">,</span><span class="s2">&quot;Somewhat Close&quot;</span><span class="p">,</span><span class="s2">&quot;Not very Close&quot;</span><span class="p">,</span><span class="s2">&quot;Missing/No Info&quot;</span><span class="p">])</span>
+
+<span class="n">closeness_party</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Very Close</th>
+      <th>Somewhat Close</th>
+      <th>Not very Close</th>
+      <th>Missing/No Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Male</th>
+      <td>212</td>
+      <td>1078</td>
+      <td>579</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <th>Female</th>
+      <td>153</td>
+      <td>989</td>
+      <td>581</td>
+      <td>617</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Python uses zero-based indexing. That means, the first element has an index 0, the second has index 1, and so on. If you want to access the fourth value in the <b>chi2_contingency(closeness_party)</b> you need to use <b>[3]</b>.</font>
+<br>
+<br><section id="id1">
+<h3>chi2_contingency<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > <font face="Helvetica" size="3.5px" color="#63b6c7" ><b>SciPy’s chi2_contingency() </b></font>returns four values, <b> 𝜒2 value, p-value, degree of freedom and expected values.</b> 
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(44.223405599340765,
+ 1.3529532990376792e-09,
+ 3,
+ array([[ 181.12486545, 1025.71259419,  575.62970936,  522.532831  ],
+        [ 183.87513455, 1041.28740581,  584.37029064,  530.467169  ]]))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>Expected values<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > You can find the expected values at the forth in the returned value. It is in an array form. Let’s print the expected values. We again use the Pandas dataframe. We are going to add index and column values and round the values to the two decimal places <b>round(2)</b>. </font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[:,:],</span> 
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span><span class="s2">&quot;Female&quot;</span><span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Very Close&quot;</span><span class="p">,</span><span class="s2">&quot;Somewhat Close&quot;</span><span class="p">,</span><span class="s2">&quot;Not very Close&quot;</span><span class="p">,</span><span class="s2">&quot;Missing/No Info&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Very Close</th>
+      <th>Somewhat Close</th>
+      <th>Not very Close</th>
+      <th>Missing/No Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Male</th>
+      <td>181.12</td>
+      <td>1025.71</td>
+      <td>575.63</td>
+      <td>522.53</td>
+    </tr>
+    <tr>
+      <th>Female</th>
+      <td>183.88</td>
+      <td>1041.29</td>
+      <td>584.37</td>
+      <td>530.47</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > The table above is called <font face="Helvetica" size="3.5px" color="#63b6c7" ><b> a contingency table</b></font>.
+<br>
+<br></section>
+<section id="id3">
+<h3>𝜒2 value<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > The 𝜒2 equation tells us to find the square of the difference between the actual value and expected value and divide it by the expected value. This is what chi2_contingency is doing behind the scene. Since Python is 0 based index, in order to print the 𝜒2 we need to use <b>[0]</b>, which is the first value.</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chisquare</span><span class="o">=</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chisquare</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44.223405599340765
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>p-Value<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > You can find the p-value at the second in the returned value. p-value measures the probability of seeing the effect when the null hypothesis is true. So, when the p-value is low enough, we reject the null hypothesis and conclude the observed effect holds.</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pvalue</span><span class="o">=</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvalue</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3529532990376792e-09
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>Degree of freedom<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<br>
+<font face="Helvetica" size="3px" color="#323752" >In the returned value from the chi2_contingency, the third one is the degree of freedom. We use <b>[2]</b> which is the third one. The following will output 3.</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dof</span><span class="o">=</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dof</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>Critical values<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p><font face="Helvetica" size="3px" color="#323752" > The level of significance and degree of freedom can be used to find the critical value. As I mentioned, you can find the degree of freedom from the array. State and define probability from the level of significance, 1%, 5% 10%, etc.</font>
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">significance</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">significance</span>
+<span class="n">dof</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">critical_value</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dof</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">critical_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.344866730144373
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Let's check the p-value by using the critical value that we calculated </font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">critical_value</span><span class="p">,</span> <span class="n">dof</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.99
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Which confirms the critical value. </font>
+<br>
+<br></section>
+<section id="id7">
+<h3>The Null and Alternative Hypotheses<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p><font face="Helvetica" size="3px" color="#323752" >Chi-square test requires to state the null hypothesis, H0, and the alternative hypothesis, H1. The null hypothesis is the statement that our two variables are independent. The alternative hypothesis is the statement that they are not independent.</font>
+<br></p>
+<p><font face="Helvetica" size="3px" color="#323752" > If the calculated Chi-square is greater than the critical value we <b>reject the null hypothesis.</b></font>
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value is: &#39;</span><span class="p">,</span> <span class="n">pval</span><span class="p">)</span>
+
+<span class="n">significance</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">significance</span>
+
+<span class="n">critical_value</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dof</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;chi=</span><span class="si">%.6f</span><span class="s1">, critical value=</span><span class="si">%.6f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">chi</span><span class="p">,</span> <span class="n">critical_value</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">chi</span> <span class="o">&gt;</span> <span class="n">critical_value</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;At </span><span class="si">%.2f</span><span class="s2"> level of significance, we reject the null hypotheses and accept H1. </span>
+<span class="s2">They are not independent.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">significance</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;At </span><span class="si">%.2f</span><span class="s2"> level of significance, we accept the null hypotheses. </span>
+<span class="s2">They are independent.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">significance</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value is:  1.3529532990376792e-09
+chi=44.223406, critical value=11.344867
+
+At 0.01 level of significance, we reject the null hypotheses and accept H1. 
+They are not independent.
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > Alternatively, we can compare the p-value and the level of significance. If p-value < the level of significance, <b> we reject the null hypothesis.</b></font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)</span>
+
+<span class="n">significance</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value=</span><span class="si">%.6f</span><span class="s1">, significance=</span><span class="si">%.2f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pval</span><span class="p">,</span> <span class="n">significance</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">pval</span> <span class="o">&lt;</span> <span class="n">significance</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;At </span><span class="si">%.2f</span><span class="s2"> level of significance, we reject the null hypotheses and accept H1. </span>
+<span class="s2">They are not independent.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">significance</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;At </span><span class="si">%.2f</span><span class="s2"> level of significance, we accept the null hypotheses. </span>
+<span class="s2">They are independent.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">significance</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value=0.000000, significance=0.01
+
+At 0.01 level of significance, we reject the null hypotheses and accept H1. 
+They are not independent.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="interactive-graphs-for-the-null-and-alternative-hypotheses">
+<h2>Interactive Graphs for The Null and Alternative Hypotheses<a class="headerlink" href="#interactive-graphs-for-the-null-and-alternative-hypotheses" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752" > We will add another country with an average turnout value in this stage of the project. Our goal is creating <b>interactive widgets</b> to increase the understanding.</font>
+<br><p><font face="Helvetica" size="3px" color="#323752" > In order to create interactive widgets, we will be using <font face="Helvetica" size="3.5px" color="#63b6c7" ><b>ipywidgets</b>.
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica" size="3px" color="#323752"> In the following interactive widget, we will observe <b> the null and alternative hypotheses on chi-square distribution</b>. We will use three different countries which will be selectable. Also user can select the <b>sigificance</b> of the test.</font>
+<br><p><font face="Helvetica" size="3px" color="#323752">A table with labels and a graph with rejection region indicated will be generated. Also a final decision will be written at the below of the plot. User can observe the differences clearly by changing countries and significance values. Code cell is closed by default but you can reveal it.</font>
+<br>
+<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dropdown</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;0.05&#39;</span><span class="p">,</span> <span class="s1">&#39;0.01&#39;</span><span class="p">,</span> <span class="s1">&#39;0.001&#39;</span><span class="p">],</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;0.05&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Significance:&#39;</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="n">bb</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dropdown</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">,</span> <span class="s1">&#39;Switzerland&#39;</span><span class="p">,</span> <span class="s1">&#39;Portugal&#39;</span><span class="p">],</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Turkey&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Country:&#39;</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+
+
+
+<span class="k">def</span> <span class="nf">chi_squ</span><span class="p">(</span><span class="n">country</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;0.05&#39;</span><span class="p">:</span>
+        <span class="n">significance</span> <span class="o">=</span> <span class="mf">0.05</span>
+    <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;0.01&#39;</span><span class="p">:</span>
+        <span class="n">significance</span> <span class="o">=</span> <span class="mf">0.01</span>
+    <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;0.001&#39;</span><span class="p">:</span>
+        <span class="n">significance</span> <span class="o">=</span> <span class="mf">0.001</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">97</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">98</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">99</span><span class="p">:</span>
+            <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">96</span><span class="p">:</span>
+            <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;education&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">7</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">8</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+            <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">13</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">14</span> <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">97</span>  <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">98</span>  <span class="ow">or</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">99</span><span class="p">:</span>
+            <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;employement&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    
+    <span class="n">count_female_t</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count_male_t</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">male</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span>
+    <span class="n">female</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">count_male_t</span> <span class="o">=</span> <span class="n">count_male_t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">male</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">count_female_t</span> <span class="o">=</span> <span class="n">count_female_t</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">female</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">count_male_t</span> <span class="o">=</span> <span class="n">count_male_t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">male</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">count_female_t</span> <span class="o">=</span> <span class="n">count_female_t</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">female</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">count_male_t</span> <span class="o">=</span> <span class="n">count_male_t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">male</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">count_female_t</span> <span class="o">=</span> <span class="n">count_female_t</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">female</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">count_male_t</span> <span class="o">=</span> <span class="n">count_male_t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">male</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">male</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;gender&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">count_female_t</span> <span class="o">=</span> <span class="n">count_female_t</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">female</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="n">closeness_party</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">male</span><span class="p">,</span>
+        <span class="n">female</span>
+    <span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span><span class="s2">&quot;Female&quot;</span><span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Very Close&quot;</span><span class="p">,</span><span class="s2">&quot;Somewhat Close&quot;</span><span class="p">,</span><span class="s2">&quot;Not very Close&quot;</span><span class="p">,</span><span class="s2">&quot;Missing/No Info&quot;</span><span class="p">])</span>
+    
+    <span class="n">display</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)</span>
+    
+    <span class="n">chi</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">closeness_party</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value is: &#39;</span><span class="p">,</span> <span class="n">pval</span><span class="p">)</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">significance</span>
+
+    <span class="n">critical_value</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dof</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;chi=</span><span class="si">%.6f</span><span class="s1">, critical value=</span><span class="si">%.6f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">chi</span><span class="p">,</span> <span class="n">critical_value</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">chi</span> <span class="o">&gt;</span> <span class="n">critical_value</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;At </span><span class="si">%.3f</span><span class="s2"> level of significance, we reject the null hypotheses and accept H1. </span>
+<span class="s2">    They are not independent.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">significance</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;At </span><span class="si">%.3f</span><span class="s2"> level of significance, we accept the null hypotheses. </span>
+<span class="s2">    They are independent.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">significance</span><span class="p">)</span>
+        
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+
+    <span class="c1">#plot Chi-square distribution with 3 degrees of freedom</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">dof</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">critical_value</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Critical Point : </span><span class="si">%.2f</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">critical_value</span>)
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">chi</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Chi : </span><span class="si">%.2f</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">chi</span>)
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span> <span class="n">critical_value</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="s1">&#39;--&gt; Reject H0&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;H0: Gender and degree to closeness are independent in </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">country</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">17</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    
+    
+    
+
+<span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">chi_squ</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">aa</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="n">bb</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "2c1a4a47e74e49f1b493e8d9ef4d1c4d", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</section>
+<section id="conclusion-of-chi-square">
+<h2>Conclusion of Chi Square<a class="headerlink" href="#conclusion-of-chi-square" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<br>
+<font face="Helvetica" size="3px" color="#323752">We observe different results in Switzerland and Turkey in terms of independency between gender and closeness to a party. In Turkey, gender and closeness to a party are independent but in Switzerland they are not. Similiar analysis can be made with between different columns of the data, for instance employemnt and educational status. The only thing different than the code above is column names. Change <b>gender</b> and <b>closeness_party </b> with desired social factors. </font>
+<br>
+<br></section>
+<section id="hypothesis-testing-plots-and-z-tests">
+<h2>Hypothesis Testing Plots and z-tests<a class="headerlink" href="#hypothesis-testing-plots-and-z-tests" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<br>
+<font face="Helvetica" size="3px" color="#323752">Again we are using the widgets to create interactive plots.  For a <b> one-tail test </b>, the critical region can be on the left or right side of the distribution. The critical region defines statistically unlikely values. The probability values initially decided upon in hypothesis tests are called <b> α levels </b> and all are unlikely occurences. I call it unlikely because this sample mean likely didn't occur by random chance. There may have been an effect on that sample mean. With a sampling distribution, a z-score of roughly <b> 1.645 </b> has an area under the curve to the left of the <b> z-value </b> of 0.95 (95% probability). Any z-score greater than 1.645 means you're unlikely to sample such a sample from the sampling distribution given an alpha of 0.05. The region to the right of that z-value is called the <b>critical region</b>. For instance, the z-score of 1.645 is called the z-critical value.</font>
+<br><br>
+<br>
+<font face="Helvetica" size="3px" color="#323752"> In the following interactive plot, the user can change the α levels and countries to observe the differences.</font>
+<br>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dropdown</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;0.05&#39;</span><span class="p">,</span> <span class="s1">&#39;0.01&#39;</span><span class="p">,</span> <span class="s1">&#39;0.001&#39;</span><span class="p">],</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;0.05&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;α level:&#39;</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dropdown</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">,</span> <span class="s1">&#39;Switzerland&#39;</span><span class="p">,</span> <span class="s1">&#39;Portugal&#39;</span><span class="p">],</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Turkey&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Country:&#39;</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dropdown</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;one-tail&#39;</span><span class="p">,</span> <span class="s1">&#39;two-tail&#39;</span><span class="p">],</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;one-tail&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Test:&#39;</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">two_tail</span><span class="p">(</span><span class="n">country</span><span class="p">,</span><span class="n">tail</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    
+    <span class="n">values_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">][</span><span class="s1">&#39;turnout&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">tail</span> <span class="o">==</span> <span class="s1">&#39;one-tail&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;0.05&#39;</span><span class="p">:</span>
+            <span class="n">mult</span> <span class="o">=</span> <span class="mf">1.645</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;0.01&#39;</span><span class="p">:</span>
+            <span class="n">mult</span> <span class="o">=</span> <span class="mf">2.33</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;0.001&#39;</span><span class="p">:</span>
+            <span class="n">mult</span> <span class="o">=</span> <span class="mf">3.1</span>
+        <span class="n">two_std_from_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span><span class="o">*</span><span class="n">mult</span>
+        <span class="n">kde</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">gaussian_kde</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">kde</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;teal&#39;</span><span class="p">)</span>
+
+        <span class="n">shade</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">two_std_from_mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">shade</span><span class="p">,</span> <span class="n">kde</span><span class="p">(</span><span class="n">shade</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;teal&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">two_std_from_mean</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Turnout Distribution in Switzerland for One-Tail Hypothesis Test&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.015</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;turnout&quot;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;frequency of occurence&quot;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    
+    <span class="k">elif</span> <span class="n">tail</span> <span class="o">==</span> <span class="s1">&#39;two-tail&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;0.05&#39;</span><span class="p">:</span>
+            <span class="n">mult</span> <span class="o">=</span> <span class="mf">1.96</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;0.01&#39;</span><span class="p">:</span>
+            <span class="n">mult</span> <span class="o">=</span> <span class="mf">2.575</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;0.001&#39;</span><span class="p">:</span>
+            <span class="n">mult</span> <span class="o">=</span> <span class="mf">3.29</span>
+        
+        <span class="n">alpha_05_positive</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span><span class="o">*</span><span class="n">mult</span>
+        <span class="n">alpha_05_negative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span><span class="o">*</span><span class="n">mult</span>
+        <span class="n">kde</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">gaussian_kde</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">kde</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">)</span>
+
+        <span class="n">shade</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">alpha_05_positive</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">shade</span><span class="p">,</span> <span class="n">kde</span><span class="p">(</span><span class="n">shade</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">)</span>
+
+        <span class="n">shade2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">alpha_05_negative</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">values_2</span><span class="p">)</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">shade2</span><span class="p">,</span> <span class="n">kde</span><span class="p">(</span><span class="n">shade2</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">alpha_05_positive</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">alpha_05_negative</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Turnout Distribution in </span><span class="si">%s</span><span class="s2"> for Two-Tail Hypothesis Test&quot;&quot;&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">country</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.015</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;turnout&quot;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;frequency of occurence&quot;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">14</span><span class="p">);</span>
+
+<span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">two_tail</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="n">b</span><span class="p">);</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "4c53a19eef704d41ba00ecd67ad10e31", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</section>
+<section id="data-visualization-optional">
+<h2>Data Visualization (optional)<a class="headerlink" href="#data-visualization-optional" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<br>
+<font face="Helvetica" size="3px" color="#323752"> Let's get familiar with plot function/libraries and make investiagations about our dataset. As we can see from the cell that we imported libraries, we are using  <font face="Helvetica" size="3.5px" color="#63b6c7" ><b>Seaborn </b></font> and <font face="Helvetica" size="3.5px" color="#63b6c7" ><b>Matplotlib</b></font>.
+<br>
+<br>
+<br>
+<font face="Helvetica"  size="5px" color="#323752" ><b>Average Turnouts of the Selected Countries </b></font> 
+<br>
+<br> <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">countries</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">,</span> <span class="s1">&#39;Switzerland&#39;</span><span class="p">]</span>
+<span class="n">turnouts</span> <span class="o">=</span> <span class="p">[</span><span class="n">turnout_list</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">],</span><span class="n">turnout_list</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">]]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Average Turnouts of the Selected Countries&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">countries</span><span class="p">,</span><span class="n">turnouts</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Average Turnouts (%)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Countries&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Lecture2_118_0.png" src="_images/Lecture2_118_0.png" />
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica"  size="5px" color="#323752" ><b>Percentage of Women Representers in Parliament </b></font> 
+<br>
+<br> <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">countries</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">,</span> <span class="s1">&#39;Switzerland&#39;</span><span class="p">]</span>
+<span class="n">women_in_parliament</span> <span class="o">=</span> <span class="p">[</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">][</span><span class="s1">&#39;women_in_parliament&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Switzerland&#39;</span><span class="p">][</span><span class="s1">&#39;women_in_parliament&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Percentage of Women Representers in Parliament&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">countries</span><span class="p">,</span><span class="n">women_in_parliament</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Women Representers (%)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Countries&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Lecture2_120_0.png" src="_images/Lecture2_120_0.png" />
+</div>
+</div>
+<br>
+<br>
+<font face="Helvetica"  size="5px" color="#323752" ><b>Gender of Respondents </b></font> 
+<br>
+<br> <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">gender</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">]</span>
+<span class="n">count_t</span> <span class="o">=</span> <span class="p">{</span><span class="n">count_male_t</span><span class="p">,</span><span class="n">count_female_t</span><span class="p">}</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Number of Male and Female Respondents in Turkey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span><span class="n">count_t</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Lecture2_122_0.png" src="_images/Lecture2_122_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">gender</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">]</span>
+<span class="n">count_s</span> <span class="o">=</span> <span class="p">{</span><span class="n">count_male_s</span><span class="p">,</span><span class="n">count_female_s</span> <span class="p">}</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Number of Male and Female Respondents in Switzerland&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span><span class="n">count_s</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Lecture2_123_0.png" src="_images/Lecture2_123_0.png" />
+</div>
+</div>
+</section>
+<section id="interactive-plot-for-social-factors-font">
+<h2>Interactive Plot for Social Factors</font><a class="headerlink" href="#interactive-plot-for-social-factors-font" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<br>
+<font face="Helvetica" size="3px" color="#323752"> Again, we will use an interactive widget to obtain the desired graphs.  Before starting to create our widgets, labels for graphs is given below.</font>
+<br><br>
+<font face="Helvetica" size="3px" color="#323752"> <b>Education Status</b>
+<font face="Helvetica" size="2px" color="#323752">  
+<ul>
+  <li>01. ISCED LEVEL 0 - EARLY CHILDHOOD EDUCATION</li>
+  <li>02. EMPLOYED - PART-TIME (15-32 HOURS WEEKLY)</li>
+  <li>03. ISCED LEVEL 2 - LOWER SECONDAR</li>
+  <li>04. ISCED LEVEL 3 - UPPER SECONDARY</li>
+  <li>05. ISCED LEVEL 4 - POST-SECONDARY NON-TERTIARY</li>
+  <li>06. ISCED LEVEL 5 - SHORT-CYCLE TERTIARY</li>
+  <li>07. ISCED LEVEL 6 - BACHELOR OR EQUIVALENT</li>
+  <li>08. ISCED LEVEL 7 - MASTER OR EQUIVALENT</li>
+  <li>09. ISCED LEVEL 8 - DOCTORAL OR EQUIVALENT</li>
+  <li>00. NONE (NO EDUCATION)</li>
+  <li>-01. MISSING/NO INFORMATION</li> 
+</ul><p><font face="Helvetica" size="3px" color="#323752"> <b>Degree of Closeness to Party</b>
+<font face="Helvetica" size="2px" color="#323752"></p>
+<ul>
+  <li>1. VERY CLOSE</li>
+  <li>2. SOMEWHAT CLOSE</li>
+  <li>3. NOT VERY CLOSE</li>
+  <li>-1. MISSING/NO INFORMATION</li>
+</ul><p><font face="Helvetica" size="3px" color="#323752"> <b>Employement Status</b>
+<font face="Helvetica" size="2px" color="#323752"></p>
+<ul>
+  <li>01. EMPLOYED - FULL-TIME (32 OR MORE HOURS WEEKLY)</li>
+  <li>02. EMPLOYED - PART-TIME (15-32 HOURS WEEKLY)</li>
+  <li>03. EMPLOYED - LESS THAN 15 HOURS</li>
+  <li>04. HELPING FAMILY MEMBER</li>
+  <li>05. UNEMPLOYED</li>
+  <li>06. STUDENT, IN SCHOOL, IN VOCATIONAL TRAINING</li>
+  <li>07. RETIRED</li>
+  <li>08. HOUSEWIFE, HOME DUTIES</li>
+  <li>09. PERMANENTLY DISABLED</li>
+  <li>10. OTHERS, NOT IN THE LABOR FORCE</li>
+  <li>-01. MISSING/NO INFORMATION</li> 
+</ul><p><font face="Helvetica" size="3px" color="#323752"> <b>Gender</b>
+<font face="Helvetica" size="2px" color="#323752"></p>
+<ol>
+  <li>MALE</li>
+  <li>FEMALE</li>
+</ol><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dropdown</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Education Level&#39;</span><span class="p">,</span> <span class="s1">&#39;Closeness to a Pary&#39;</span><span class="p">,</span> <span class="s1">&#39;Employement Status&#39;</span><span class="p">],</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Education Level&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Social Factors:&#39;</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dropdown</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Turkey&#39;</span><span class="p">,</span> <span class="s1">&#39;Switzerland&#39;</span><span class="p">],</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Turkey&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Country:&#39;</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dropdown</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender divided&#39;</span><span class="p">],</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Graph:&#39;</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">social_graph</span><span class="p">(</span><span class="n">social</span><span class="p">,</span><span class="n">country</span><span class="p">,</span><span class="n">graph</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">graph</span> <span class="o">==</span> <span class="s1">&#39;Total&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">social</span> <span class="o">==</span> <span class="s2">&quot;Education Level&quot;</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;education&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">],</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;axes.grid&#39;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Education Status of </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">country</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;EDUCATION STATUS&#39;</span><span class="p">)</span>
+        
+        <span class="k">elif</span> <span class="n">social</span> <span class="o">==</span> <span class="s2">&quot;Closeness to a Pary&quot;</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">],</span>  <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">binwidth</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;axes.grid&#39;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Closeness to a Party in </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">country</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Closeness to a Party&#39;</span><span class="p">)</span>
+            
+        <span class="k">elif</span> <span class="n">social</span> <span class="o">==</span> <span class="s2">&quot;Employement Status&quot;</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;employement&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">],</span>  <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">binwidth</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;axes.grid&#39;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Employment Status in Turkey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Employment Status&#39;</span><span class="p">)</span>
+    
+    <span class="k">elif</span> <span class="n">graph</span> <span class="o">==</span> <span class="s1">&#39;Gender divided&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">social</span> <span class="o">==</span> <span class="s2">&quot;Education Level&quot;</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;education&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">],</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">.7</span> <span class="p">,</span><span class="n">hue</span> <span class="o">=</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span>  <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">binwidth</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;axes.grid&#39;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Education Status of Turkey with Genders&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;EDUCATION STATUS&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        
+        <span class="k">elif</span> <span class="n">social</span> <span class="o">==</span> <span class="s2">&quot;Closeness to a Pary&quot;</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;closeness_party&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">],</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">.7</span>
+                        <span class="p">,</span><span class="n">hue</span> <span class="o">=</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span>  <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">binwidth</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;axes.grid&#39;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Closeness to a Party in Turkey with Genders&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Closeness to a Party &#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            
+        <span class="k">elif</span> <span class="n">social</span> <span class="o">==</span> <span class="s2">&quot;Employement Status&quot;</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;employement&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_dict</span><span class="p">[</span><span class="n">country</span><span class="p">],</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">.7</span>
+                        <span class="p">,</span><span class="n">hue</span> <span class="o">=</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span>  <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">binwidth</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;axes.grid&#39;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Employment Status in Switzerland with Genders&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Employment Status&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+<span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">social_graph</span><span class="p">,</span> <span class="n">social</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="n">c</span><span class="p">);</span>                   
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "882427c59d7e463cb8f0e0d1185a0c63", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="Lecture1.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Lecture 1: T-Test and ANOVA</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="Lecture3.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Lecture 3: Linear Regression with Continues Dependent Variable and Multiple Independent Variables</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
